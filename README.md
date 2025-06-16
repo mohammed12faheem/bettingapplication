@@ -1,5 +1,5 @@
 Initiate — Betting Application (Interview Task)
-Initiate is a simple, responsive React application built as an interview task for a betting platform. This project focuses purely on the frontend, demonstrating a clean structure, responsive UI with Tailwind CSS, and dummy JSON data for club and game lists.
+responsive React application built as an interview task for a betting platform. This project focuses purely on the frontend, demonstrating a clean structure, responsive UI with Tailwind CSS, and dummy JSON data for club and game lists.
 
 
 Tech Stack
