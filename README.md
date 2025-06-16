@@ -52,9 +52,36 @@ For displaying lists like clubs or games, I used flatlist-react instead of a sim
 Date formatting:
 moment is used for converting and displaying dates in a readable format.
 
+
+to run the application 
+
 Notifications:
 react-toastify provides simple, non-intrusive alerts for actions like placing a bet.
 
 Responsive design:
 The app is styled with Tailwind CSS and is fully responsive for various screen sizes.
+
+
+ How to Run the Application
+
+ Install dependencies:
+
+ ```npm install```
+ 
+or
+
+```yarn install```
+
+Start the development server:
+
+```npm run dev```
+
+or
+
+``yarn dev``
+
+or for hosting in mobile 
+
+
+```yarn dev --host ipaddress```
 
