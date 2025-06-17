@@ -16,8 +16,10 @@ export default function BettingScreen() {
   const today = new Date().toISOString().split("T")[0];
 
   const getBetAmount = (number) => {
-    const bet = bets.find((b) => b.number === number);
-    return bet ? bet.amount : "";
+    const betSum = bets
+      .filter((b) => b.number === number)
+      .reduce((sum, b) => sum + Number(b.amount), 0);
+    return betSum || "";
   };
 
   const toggleBet = (number) => {
@@ -25,27 +27,23 @@ export default function BettingScreen() {
       toast.warn("Select points first");
       return;
     }
-
+  
     setBets((prev) => {
-      const exists = prev.find((b) => b.number === number);
-      if (exists) {
-        return prev.filter((b) => b.number !== number);
-      } else {
-        return [
-          ...prev,
-          {
-            number,
-            amount: selectedPoint,
-            gameName: item?.game_name,
-            clubId,
-            betType,
-            date: today,
-          },
-        ];
-      }
+      // Add a new bet always — do NOT replace or remove existing bets
+      return [
+        ...prev,
+        {
+          number,
+          amount: selectedPoint,
+          gameName: item?.game_name,
+          clubId,
+          betType,
+          date: today,
+        },
+      ];
     });
   };
-
+  
   const handleReset = () => {
     setBets([]);
     setSelectedPoint(0);
@@ -176,7 +174,7 @@ export default function BettingScreen() {
               {item?.game_name} ({club_name})
             </h2>
 
-            <div className="overflow-x-auto mb-4 p-6">
+            <div className="overflow-y-auto mb-4 p-6 max-h-60">
               <table className="w-full border border-gray-300">
                 <thead>
                   <tr className="bg-[#D9D9D9]">
@@ -206,14 +204,14 @@ export default function BettingScreen() {
                 </tbody>
               </table>
 
-              <div className="flex  sm:flex-row flex-col justify-between mb-4 font-semibold">
+            </div>
+              <div className="flex px-6 sm:flex-row flex-col justify-between mb-4 font-semibold">
                 <div>Total Bids: {bets.length}</div>
                 <div>
                   Total Bids Amount:{" "}
                   {bets.reduce((total, bet) => total + Number(bet.amount), 0)}
                 </div>
               </div>
-            </div>
             <div className="flex justify-end gap-4 p-6">
               <button
                 onClick={() => setShowModal(false)}
@@ -245,3 +243,5 @@ export default function BettingScreen() {
     </div>
   );
 }
+
+
